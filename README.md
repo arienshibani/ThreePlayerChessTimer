@@ -5,4 +5,4 @@ A chess clock for a three man chess game!
 
 ## Live Demo
 
-<three-player-chess-timer-ltenup4nj-arienshibani.vercel.app>
+https://three-player-chess-timer-ltenup4nj-arienshibani.vercel.app
