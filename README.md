@@ -1,8 +1,13 @@
 # 3 Player Chess Timer ♚
 
-A simple chess timer for a three man chess games! Three player chess boards lend themselves to long and sometimes tedious games, this chess timer solves the issue.
+Three player chess boards lend themselves to long and sometimes tedious games, use this chess timer to shorten games and make it more fun!
+
+## Live Demo
+<https://three-player-chess-timer.vercel.app>
 
 ![image](https://github.com/arienshibani/ThreePlayerChessTimer/assets/22197324/5e0b7848-3829-4609-8d61-11711b6682e1)
+
+
 
 ## Features
 * Customizable timers through the UI, or directly in the browser through query parameters.
@@ -10,8 +15,8 @@ A simple chess timer for a three man chess games! Three player chess boards lend
 * Pause / Unpause button
 
 ### Query Parameters
-* `?time=300` to set the time to 300 seconds (5 minutes) for all three players
-* Asynchronous timers can be set to each individual player if desired `?white=5&black=300&red=20`
+* `?time` to set the time for all three players
+   * For instance, a 20 second game can be configured as such <https://three-player-chess-timer.vercel.app/?time=20>
+* `?white/black/red` individual player colors to set asynchronous timers 
+  * For instance  <https://three-player-chess-timer.vercel.app/?white=10&black=20&red=300>
 
-## Live Demo
-https://three-player-chess-timer-ltenup4nj-arienshibani.vercel.app
