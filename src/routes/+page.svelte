@@ -1,14 +1,14 @@
 <script>
   import { onMount } from "svelte";
-	import { tweened } from 'svelte/motion';
-
+	import { fade, fly } from 'svelte/transition';
 
   let currentPlayer = 0;
+  let timeSelected = 600;
   const playerColors = ["WHITE", "BLACK", "RED"];
-  let timeRemaining = [600, 600, 600];
+  let timeRemaining = [timeSelected, timeSelected, timeSelected];
   let timers = [null, null, null]; // Individual timers for each player
   let gameOver = false;
-
+  let gamePaused = true;
 
   /**
    * @name updateTimersFromURL
@@ -73,6 +73,7 @@
   };
 
   const nextPlayer = () => {
+    gamePaused = false;
     clearInterval(timers[currentPlayer]);
     currentPlayer = (currentPlayer + 1) % 3;
     startTurn();
@@ -105,6 +106,28 @@
   };
 
   const handleClicks = (event) => {
+    //if the select element was clicked, don't do anything
+    if(event.target.classList.contains("timerOptions")){
+      return;
+    }
+
+    //if game is paused, unpause it
+    if(gamePaused){
+      gamePaused = false;
+      startTurn();
+      return;
+    }
+
+    if(event.target.classList.contains("pauseButton") && !gamePaused){
+      gamePaused = true;
+      if(timers[currentPlayer]){
+        clearInterval(timers[currentPlayer]);
+      }else{
+        startTurn();
+      }
+      return;
+    }
+
     if(gameOver){
       return;
     }
@@ -121,9 +144,16 @@
     window.addEventListener("touchstart", handleTouch);
     window.addEventListener("click", handleClicks);
   });
+
+  const handleSelection = (event) => {
+    console.log(event.target.value)
+    timeSelected = event.target.value;
+  };
 </script>
 
-<main>
+
+
+<main in:fly={{ y: 200, duration: 2000 }}>
   <div class="chess-clock">
 
     {#if gameOver}
@@ -137,7 +167,7 @@
         style={`background-image: ${
           timeRemaining[playerIndex] <= 0 ? "" : ""
         } `}
-        class={playerIndex === currentPlayer ? "active" : ""}
+        class={playerIndex === currentPlayer && gamePaused === false ? "active" : ""}
       >
         <div class="playerInfo" id={playerColors[playerIndex]}>
           <div>
@@ -154,14 +184,89 @@
         </div>
       </div>      
     {/each}
-
-
   </div>
 
 
+  <span class="settings">
+    {#if !gameOver}
+    <button class="pauseButton">
+      {gamePaused ? " Play ▶️" : "Pause ⏸️"}
+    </button>
+    {/if}
+
+    <!-- Set value of "time selected" -->
+    <select class="timerOptions" name="timers" bind:value={timeSelected} on:change={handleSelection}>
+      <option value="Select a time" disabled selected>⏱️</option>
+      <option value="300">5m</option>
+      <option value="600">10m</option>
+      <option value="900">15m</option>
+      <option value="1200">20m</option>
+      <option value="1500">25m</option>
+      <option value="1800">30m</option>
+      <option value="2100">35m</option>
+      <option value="2400">40m</option>
+      <option value="2700">45m</option>
+      <option value="3000">50m</option>
+      <option value="3300">55m</option>
+      <option value="3600">60m</option>
+    </select>
+
+    <!--  -->
+    <a data-sveltekit-reload href="/?time={timeSelected}">
+      <button class="restartButton">
+        Reset ♻️
+      </button>
+    </a>
+  </span>
+
 </main>
 
+
 <style>
+  select {
+    position: absolute;
+    bottom: 0;
+    right: 1;
+    margin: 1px;
+    padding: 10px;
+    width: 100px;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+  }
+
+  .restartButton{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 1px;
+    padding: 10px;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+  }
+
+  .pauseButton{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 1px;
+    padding: 10px;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+  }
+
   h2 {
     font-size: 5vh;
     text-align: center;
@@ -211,12 +316,6 @@
   .chess-clock {
     overflow: hidden;
     font-size: 2rem;
-  }
-
-  .chess-clock > button {
-    border: 1px solid #ccc;
-    cursor: pointer;
-    text-align: center;
   }
 
   #WHITE {
