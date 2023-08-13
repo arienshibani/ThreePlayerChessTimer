@@ -29,14 +29,14 @@
       ];
     }
     // Set individual players times.
-    if (searchParams.has("p1")) {
-      timeRemaining[0] = parseInt(searchParams.get("p1"));
+    if (searchParams.has("white")) {
+      timeRemaining[0] = parseInt(searchParams.get("white"));
     }
-    if (searchParams.has("p2")) {
-      timeRemaining[1] = parseInt(searchParams.get("p2"));
+    if (searchParams.has("black")) {
+      timeRemaining[1] = parseInt(searchParams.get("black"));
     }
-    if (searchParams.has("p3")) {
-      timeRemaining[2] = parseInt(searchParams.get("p3"));
+    if (searchParams.has("red")) {
+      timeRemaining[2] = parseInt(searchParams.get("red"));
     }
   };
 
