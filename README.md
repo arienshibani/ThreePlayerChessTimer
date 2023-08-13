@@ -1,18 +1,17 @@
-# Three Man Chess Clock
+# 3 Player Chess Timer ♚
 
-A chess clock for a three man chess game! Click the button in order to cycle to the next player!
+A simple chess timer for a three man chess games! Three player chess boards lend themselves to long and sometimes tedious games, this chess timer solves the issue.
 
-## Customized Timer
-Customize the time for all player by using the `time` parameter. For instance:
-`http://127.0.0.1:5173/?time=300` will give everyone 5 minutes. (300 seconds)
+![image](https://github.com/arienshibani/ThreePlayerChessTimer/assets/22197324/5e0b7848-3829-4609-8d61-11711b6682e1)
 
-## Customized Individual Timers
-Customize the timer with query parameters, for instance: `http://localhost:5000?p1=600&p2=900&p3=450`, will give each player individual times.
+## Features
+* Customizable timers through the UI, or directly in the browser through query parameters.
+* Touch / Click anywhere to cycle to the next player and pause the last timer.
+* Pause / Unpause button
 
-![image](https://github.com/arienshibani/ThreePlayerChessTimer/assets/22197324/ab7b7382-e907-42ab-9bac-051d4b166c4f)
-
-
+### Query Parameters
+* `?time=300` to set the time to 300 seconds (5 minutes) for all three players
+* Asynchronous timers can be set to each individual player if desired `?white=5&black=300&red=20`
 
 ## Live Demo
-
 https://three-player-chess-timer-ltenup4nj-arienshibani.vercel.app
