@@ -313,6 +313,18 @@
     }
   }
 
+
+  
+  @media only screen and (max-width: 800px) {
+    .playerInfo{
+    user-select: none;
+    cursor: pointer; 
+    padding: 3.5rem;
+    font-size: 4vh;
+    font-weight: bold;
+  }
+  }
+
   .chess-clock {
     overflow: hidden;
     font-size: 2rem;
