@@ -196,7 +196,7 @@
 
     <!-- Set value of "time selected" -->
     <select class="timerOptions" name="timers" bind:value={timeSelected} on:change={handleSelection}>
-      <option value="Select a time" disabled selected>⏱️</option>
+      <option value="Select a time" disabled selected>Click ♻️ to start with selected time</option>
       <option value="300">5m</option>
       <option value="600">10m</option>
       <option value="900">15m</option>
