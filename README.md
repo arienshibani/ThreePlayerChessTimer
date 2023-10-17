@@ -1,6 +1,6 @@
 # 3 Player Chess Timer ♚
 
-Three player chess boards lend themselves to long and sometimes tedious games, use this chess timer to shorten games and make it more fun!
+Someone brought in a three player chessboard at the office so I made my own chess timer for it.
 
 ## Live Demo
 <https://three-player-chess-timer.vercel.app>
